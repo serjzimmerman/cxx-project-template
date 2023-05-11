@@ -12,6 +12,7 @@ function(suppress_warnings TARGET_NAME)
 endfunction()
 
 function(enable_warnings TARGET_NAME)
+
     if(MSVC)
         target_compile_options(${TARGET_NAME} /W4)
     elseif("${CMAKE_CXX_COMPILER_ID}" MATCHES "Clang")
@@ -53,15 +54,13 @@ function(enable_warnings TARGET_NAME)
                     -Wimplicit-fallthrough
                     -Wno-missing-field-initializers)
     endif()
+
 endfunction(enable_warnings)
 
+option(LINT OFF)
 if(${LINT})
     find_program(CLANG_TIDY_EXECUTABLE "clang-tidy")
-
-    set(CLANG_TIDY_COMMAND
-        "${CLANG_TIDY_EXECUTABLE}"
-        "-checks=-*,modernize-*,-modernize-use-trailing-return-type*,readability-*,-readability-implicit-bool-conversion*,\
-        -readability-identifier-length*,portability-*,bugprone-*")
+    set(CLANG_TIDY_COMMAND "${CLANG_TIDY_EXECUTABLE}")
 
     function(target_enable_linter TARGET_NAME)
         set_target_properties(${TARGET_NAME} PROPERTIES CXX_CLANG_TIDY
