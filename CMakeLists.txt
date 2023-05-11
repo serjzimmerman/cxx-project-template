@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
-project(cxx-project-template)
+project(cxx_project_template)
 
 option(INSOURCEBUILD OFF) # Prevent in-source style builds
 if((${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR}) AND NOT
@@ -37,3 +37,10 @@ function(add_example_executable TARGET_NAME SOURCE)
 endfunction()
 
 add_example_executable(example examples/example.cc)
+
+option(CXX_PROJECT_TEMPLATE_BUILD_DOCS OFF)
+if(CXX_PROJECT_TEMPLATE_BUILD_DOCS)
+    find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS mscgen dia)
+
+    doxygen_add_docs(${CMAKE_PROJECT}_docs include ALL)
+endif()
