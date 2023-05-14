@@ -1,8 +1,12 @@
 function(suppress_warnings TARGET_NAME)
     get_target_property(target_options ${TARGET_NAME} COMPILE_OPTIONS)
 
+    if(target_options MATCHES "target_options-NOTFOUND")
+        set(target_options "")
+    endif()
+
     if(NOT MSVC)
-        # Come up with a better way
+        # [TODO]: Come up with a better way
     else()
         list(APPEND target_options -w)
     endif()
