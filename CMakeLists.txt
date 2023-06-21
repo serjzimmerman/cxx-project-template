@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.13)
+# [FIXME]: Update project name
 project(cxx_project_template)
 
 option(INSOURCEBUILD OFF) # Prevent in-source style builds
@@ -38,6 +39,7 @@ endfunction()
 
 add_example_executable(example examples/example.cc)
 
+# [FIXME]: Update project name
 option(CXX_PROJECT_TEMPLATE_BUILD_DOCS OFF)
 if(CXX_PROJECT_TEMPLATE_BUILD_DOCS)
     find_package(Doxygen REQUIRED OPTIONAL_COMPONENTS mscgen dia)
